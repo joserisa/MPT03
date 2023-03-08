@@ -1,0 +1,19 @@
+ip link set dev eth0 up
+ip link set dev eth1 up
+ip link set dev eth2 up
+
+ip link add link eth0 name eth0.10 type vlan id 10
+ip link add link eth0 name eth0.20 type vlan id 20
+
+ip link set dev eth0.10 up
+ip link set dev eth0.20 up
+
+brctl addbr aula1
+brctl addif aula1 eth0.10
+brctl addif aula1 eth2
+ip link set dev aula1 up
+
+brctl addbr aula2
+brctl addif aula2 eth0.20
+brctl addif aula2 eth1
+ip link set dev aula2 up
